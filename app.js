@@ -20,7 +20,8 @@ var dividedBy = document.getElementById("divided-by");
 
 /* OTHERS */
 
-var result = document.querySelector(".calculator__display");
+var result = document.querySelector(".display__result-container");
+var calculus = document.querySelector(".display__calculus-container");
 var erase = document.getElementById("erase");
 var equal = document.getElementById("equal");
 var operating1 = 0, operating2 = 0, operator = "";
@@ -28,82 +29,87 @@ var operating1 = 0, operating2 = 0, operator = "";
 /* EVENTS */
 
 one.addEventListener('click',function(){
-    result.textContent = result.textContent + '1';
+    calculus.textContent = calculus.textContent + '1';
 });
 
 two.addEventListener('click',function(){
-    result.textContent = result.textContent + '2';
+    calculus.textContent = calculus.textContent + '2';
 });
 
 three.addEventListener('click',function(){
-    result.textContent = result.textContent + '3';
+    calculus.textContent = calculus.textContent + '3';
 });
 
 four.addEventListener('click',function(){
-    result.textContent = result.textContent + '4';
+    calculus.textContent = calculus.textContent + '4';
 });
 
 five.addEventListener('click',function(){
-    result.textContent = result.textContent + '5';
+    calculus.textContent = calculus.textContent + '5';
 });
 
 six.addEventListener('click',function(){
-    result.textContent = result.textContent + '6';
+    calculus.textContent = calculus.textContent + '6';
 });
 
 seven.addEventListener('click',function(){
-    result.textContent = result.textContent + '7';
+    calculus.textContent = calculus.textContent + '7';
 });
 
 eight.addEventListener('click',function(){
-    result.textContent = result.textContent + '8';
+    calculus.textContent = calculus.textContent + '8';
 });
 
 nine.addEventListener('click',function(){
-    result.textContent = result.textContent + '9';
+    calculus.textContent = calculus.textContent + '9';
 });
 
 zero.addEventListener('click',function(){
-    result.textContent = result.textContent + '0';
+    calculus.textContent = calculus.textContent + '0';
 });
 
 erase.addEventListener('click',function(){
     reset();
+    calculus.style.opacity='1';
 });
 
 plus.addEventListener('click',function(){
-    operating1 = result.textContent;
+    calculus.style.opacity='1';
+    operating1 = calculus.textContent;
     operator = '+';
     clean();
 });
 
 minus.addEventListener('click',function(){
-    operating1 = result.textContent;
+    calculus.style.opacity='1';
+    operating1 = calculus.textContent;
     operator = '-';
     clean();
 });
 
 times.addEventListener('click',function(){
-    operating1 = result.textContent;
+    calculus.style.opacity='1';
+    operating1 = calculus.textContent;
     operator = '*';
     clean();
 });
 
 dividedBy.addEventListener('click',function(){
-    operating1 = result.textContent;
+    calculus.style.opacity='1';
+    operating1 = calculus.textContent;
     operator = '/';
     clean();
 });
 
 equal.addEventListener('click',function(){
-    operating2 = result.textContent;
+    operating2 = calculus.textContent;
     solve();
 });
 
 /* FUNCTIONS */
 
 function clean(){
-    result.textContent = "";
+    calculus.textContent = "";
 }
 
 function reset(){
@@ -111,6 +117,7 @@ function reset(){
     operating1 = 0;
     operating2 = 0;
     operator = 0;
+    result.textContent = 0;
 }
 
 function solve(){
@@ -132,9 +139,11 @@ function solve(){
                     res = operating1 / operating2;
                 else {
                     res = operating1 / operating2;
-                    res = res.toFixed(10);
+                    res = res.toFixed(5);
                 }
             break;
         }
     result.textContent = res;
+    calculus.textContent = res;
+    calculus.style.opacity='0';
 }

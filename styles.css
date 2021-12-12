@@ -15,6 +15,7 @@ body {
     display: flex;
     margin: auto;
     border: 0 solid;
+    background-image: url("img/maths.png");
 }
 
 .calculator-container {
@@ -25,22 +26,45 @@ body {
     flex-direction: column;
     margin: auto;
     border: 0 solid;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(210, 210, 210);
     border-radius: 15px;
+    box-shadow: 20px 20px 50px rgba(51, 51, 51,0.3);
 }
 
 .calculator__display {
     width: 90%;
     height: 20%;
     display: flex;
+    flex-direction: column;
     margin: 0 auto;
-    justify-content: center;
-    align-items: center;
     border: 5px solid rgba(0, 93, 168,0.3);
     background-color: rgb(0, 132, 255);
     border-radius: 15px;
     font-size: 40px;
     word-break: break-all;
+    box-shadow: 2px 2px 5px grey;
+}
+
+.display__calculus-container {
+    width: 95%;
+    height: 40%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: right;
+    align-items: center;
+    font-size: 25px;
+    border: 0 solid #333;
+}
+
+.display__result-container {
+    width: 95%;
+    height: 50%;
+    display: flex;
+    font-size: 42px;
+    margin: auto auto 0 auto;
+    justify-content: right;
+    align-items: center;
+    border: 0 solid #333;
 }
 
 .calculator__buttons-container {
@@ -53,8 +77,8 @@ body {
 }
 
 .buttons-container__button {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     display: flex;
     margin: auto;
     border: 0 solid;
@@ -62,7 +86,8 @@ body {
     font-size: 30px;
     align-items: center;
     justify-content: center;
-    background-color: rgb(211, 211, 211);
+    background-color: rgb(200, 200, 200);
+    box-shadow: 1px 1px 5px grey;
 }
 
 .buttons-container__button:hover {
@@ -73,4 +98,16 @@ body {
 
 .buttons-container__special-button {
     background-color: rgb(0, 153, 255);
+}
+
+@media screen and (width:320px) {
+    .calculator-container {
+        width: 300px;
+        height: 450px;
+    }
+
+    .buttons-container__button {
+        width: 60px;
+        height: 60px;
+    }
 }
