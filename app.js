@@ -139,7 +139,7 @@ function solve(){
                     res = operating1 / operating2;
                 else {
                     res = operating1 / operating2;
-                    res = res.toFixed(5);
+                    res = parseFloat(res.toFixed(10));
                 }
             break;
         }
