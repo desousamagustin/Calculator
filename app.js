@@ -1,4 +1,4 @@
-/* OPERATINGS */
+// OPERATINGS
 
 var one = document.getElementById("one");
 var two = document.getElementById("two");
@@ -11,22 +11,23 @@ var eight = document.getElementById("eight");
 var nine = document.getElementById("nine");
 var zero = document.getElementById("zero");
 
-/* OPERATORS */
+// OPERATORS
 
 var plus = document.getElementById("plus");
 var minus = document.getElementById("minus");
 var times = document.getElementById("times");
 var dividedBy = document.getElementById("divided-by");
 
-/* OTHERS */
+// OTHERS
 
 var result = document.querySelector(".display__result-container");
 var calculus = document.querySelector(".display__calculus-container");
 var erase = document.getElementById("erase");
 var equal = document.getElementById("equal");
-var operating1 = 0, operating2 = 0, operator = "";
+var firstSolving = true;
+var lastValue = "";
 
-/* EVENTS */
+// EVENTS
 
 one.addEventListener('click',function(){
     calculus.textContent = calculus.textContent + '1';
@@ -74,76 +75,90 @@ erase.addEventListener('click',function(){
 });
 
 plus.addEventListener('click',function(){
-    calculus.style.opacity='1';
-    operating1 = calculus.textContent;
-    operator = '+';
-    clean();
+    if(firstSolving == false)
+        calculus.textContent = lastValue;
+    
+    calculus.textContent = calculus.textContent + '+';
 });
 
 minus.addEventListener('click',function(){
-    calculus.style.opacity='1';
-    operating1 = calculus.textContent;
-    operator = '-';
-    clean();
+    if(firstSolving == false)
+        calculus.textContent = lastValue;
+
+    calculus.textContent = calculus.textContent + '-';
 });
 
 times.addEventListener('click',function(){
-    calculus.style.opacity='1';
-    operating1 = calculus.textContent;
-    operator = '*';
-    clean();
+    if(firstSolving == false)
+        calculus.textContent = lastValue;
+
+    calculus.textContent = calculus.textContent + '*';
 });
 
 dividedBy.addEventListener('click',function(){
-    calculus.style.opacity='1';
-    operating1 = calculus.textContent;
-    operator = '/';
-    clean();
+    if(firstSolving == false)
+        calculus.textContent = lastValue;
+
+    calculus.textContent = calculus.textContent + '/';
 });
 
 equal.addEventListener('click',function(){
-    operating2 = calculus.textContent;
     solve();
 });
 
 /* FUNCTIONS */
 
-function clean(){
-    calculus.textContent = "";
-}
-
 function reset(){
-    clean();
-    operating1 = 0;
-    operating2 = 0;
-    operator = 0;
+    calculus.textContent = "";
     result.textContent = 0;
+    lastValue = "";
+    firstSolving = true;
 }
 
 function solve(){
-    var res = 0;
+    var operator = "";
+    var operating1 = "";
+    var operating2 = "";
+    var resultado = 0;
+    var flag = false;
+    var i = 0;
+
+    do {
+        if(calculus.textContent.charAt(i) != "+" && calculus.textContent.charAt(i) != "-" && calculus.textContent.charAt(i) != "*" &&  calculus.textContent.charAt(i) != "/")
+            operating1 = operating1 + calculus.textContent.charAt(i);
+        else {
+            operator = calculus.textContent.charAt(i);
+            flag = true;
+        }
+
+        i++;
+    } while(flag != true);
+
+    for(i; i < calculus.textContent.length;i++)
+        operating2 = operating2 + calculus.textContent.charAt(i);
+
     switch(operator){
         case '+':
-            res = parseFloat(operating1) + parseFloat(operating2);
+            resultado = parseFloat(operating1) + parseFloat(operating2);
             break;
         case '-':
-            res = operating1 - operating2;
+            resultado = operating1 - operating2;
             break;
         case '*':
-            res = operating1 * operating2;
+            resultado = operating1 * operating2;
             break;
         case '/':
             if(operating2 == 0)
-                res = "Math error";
+                resultado = "Math error";
             else if(operating1 % operating2 == 0)
-                    res = operating1 / operating2;
+                    resultado = operating1 / operating2;
                 else {
-                    res = operating1 / operating2;
-                    res = parseFloat(res.toFixed(10));
+                    resultado = operating1 / operating2;
+                    resultado = parseFloat(resultado.toFixed(8));
                 }
             break;
-        }
-    result.textContent = res;
-    calculus.textContent = res;
-    calculus.style.opacity='0';
+    }
+    result.textContent = resultado;
+    lastValue = resultado.toString();
+    firstSolving = false;
 }
